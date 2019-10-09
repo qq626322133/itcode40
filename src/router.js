@@ -4,6 +4,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 // 导入 useElement
 import UseElement from './views/useElement'
+// 导入login & Home
+import Login from '@/views/login'
+import Home from '@/views/home'
 
 // 使用路由
 Vue.use(Router)
@@ -11,6 +14,20 @@ Vue.use(Router)
 // 创建并且导出一个 Router 对象
 export default new Router({
   routes: [
+    {
+      path: '/',
+      redirect: '/home'
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
+    },
+    {
+      path: '/Home',
+      name: 'home',
+      component: Home
+    },
     {
       path: '/useElement',
       name: 'useElement',
