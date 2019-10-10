@@ -13,11 +13,12 @@
           <el-input v-model="form.mobile" placeholder="请输入手机号"></el-input>
         </el-form-item>
         <el-form-item prop="code">
-          <el-col :span="16">
+             <!-- 一行 -->
+          <el-col :span="14">
             <el-input v-model="form.code" placeholder="请输入验证码"></el-input>
           </el-col>
-          <el-col :span="8">
-            <el-button>获取验证码</el-button>
+          <el-col :span="8" :offset="2">
+            <el-button class="colBtn">获取验证码</el-button>
           </el-col>
         </el-form-item>
         <el-form-item>
@@ -29,12 +30,14 @@
 </template>
 
 <script>
+// 导入 axios
+import axios from 'axios'
 export default {
   data () {
     return {
       form: {
-        mobile: '',
-        code: ''
+        mobile: '13911111111',
+        code: '246810'
       },
       // 定义规则
       rules: {
@@ -50,6 +53,7 @@ export default {
     }
   },
   methods: {
+    // 用户的登录
     login () {
       // 得到 el-form 元素
       // this.$refs['form']
@@ -57,10 +61,32 @@ export default {
         // 如果valid 为true 说明验证通过
         // 如果valid 为false 说明验证不通过
         if (valid) {
-          console.log('验证通过')
+          // 将数据提交到服务器
+          this.submitData()
         } else {
           // 结束当前方法
         }
+      })
+    },
+    // 数据的提交
+    submitData () {
+      // 发送请求到服务器
+      axios({
+        url: 'http://ttapi.research.itcast.cn/mp/v1_0/authorizations',
+        method: 'POST',
+        data: this.form
+      }).then(res => {
+        // res 中有一个属性叫做 data在 data 中有两个属性后面我们会用上: token, refresh_token
+        // 只要进入到这个方法中说明登录成功
+        // 跳转到主页
+        this.$router.push('./')
+        this.$message({
+          message: '登录成功',
+          type: 'success'
+        })
+      }).catch(err => {
+        console.log(err)
+        this.$message.error('手机号或者验证码错误')
       })
     }
   }
@@ -70,8 +96,11 @@ export default {
 <style lang="less" scope>
 .login {
   height: 100%;
+  // flex 布局
   display: flex;
+  // 主轴居中: 默认 水平
   justify-content: center;
+  // 侧轴居中: 默认 垂直
   align-items: center;
   background-color: #ccc;
   .login-warp {
@@ -86,6 +115,9 @@ export default {
       }
     }
     .loginbtn {
+      width: 100%;
+    }
+    .colBtn {
       width: 100%;
     }
   }
