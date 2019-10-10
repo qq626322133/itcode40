@@ -18,7 +18,10 @@
             <el-input v-model="form.code" placeholder="请输入验证码"></el-input>
           </el-col>
           <el-col :span="8" :offset="2">
-            <el-button class="colBtn" @click="getCode">获取验证码</el-button>
+            <!-- timer: 2 (定时器的标识) 定时器开启 timer:null定时器关闭 -->
+            <el-button :disabled="!!timer" class="colBtn" @click="getCode">
+              {{timer ? `${codeTime}秒后获取`:'获取验证码'}}
+            </el-button>
           </el-col>
         </el-form-item>
         <el-form-item prop="read">
@@ -39,6 +42,7 @@
 <script>
 // 导入 axios
 import axios from 'axios'
+import { setInterval, clearTimeout } from 'timers'
 export default {
   data () {
     return {
@@ -70,7 +74,11 @@ export default {
           // pattern: /true/只能匹配到结果为true
           { pattern: /true/, message: '请先阅读用户协议', trigger: 'change' }
         ]
-      }
+      },
+      // 倒计时的时间
+      codeTime: 10,
+      // 设置一个定时器
+      timer: null
     }
   },
   methods: {
@@ -127,8 +135,19 @@ export default {
         // 说明验证不通过
           return
         }
-        // 验证通过
-        console.log('这里是通过之后的代码')
+        // 验证通过:开启倒计时
+        this.timer = setInterval(() => {
+          // 时间需要减少
+          this.codeTime--
+          // 当时间为 0时，需要定时器消除
+          if (this.codeTime <= 0) {
+            clearTimeout(this.timer)
+            // 重置倒计时
+            this.codeTime = 10
+            // 将定时器重置为 null
+            this.timer = null
+          }
+        }, 1000)
       })
     }
   }
