@@ -1,9 +1,13 @@
 <template>
   <div class="layout">
     <el-container>
-      <el-aside width="200px">Aside</el-aside>
+      <el-aside width="200px">
+        <layoutasider />
+      </el-aside>
       <el-container>
-        <el-header>Header</el-header>
+         <el-header>
+           <layoutheader />
+         </el-header>
         <el-main>Main</el-main>
       </el-container>
     </el-container>
@@ -11,24 +15,37 @@
 </template>
 
 <script>
-export default {}
+// 导入两个布局组件
+import layoutheader from '@/views/layout/components/layoutHeader'
+import layoutasider from '@/views/layout/components/layroutAsider'
+export default {
+  components: {
+    layoutheader,
+    layoutasider
+  }
+}
 </script>
 
 <style lang="less" scoped>
-
-  .el-header, .el-footer {
+   .layout {
+     height: 100%;
+     // $ 去掉选择器后的空格
+     // > 子代码选项器
+     &>.el-container {
+       height: 100%;
+     }
+   }
+    .el-header {
     background-color: #fff;
     color: #333;
   }
-
-  .el-aside {
-    background-color: #D3DCE6;
+   .el-aside {
+    background-color: #323745;
     color: #333;
     line-height: 60px;
   }
-
   .el-main {
-    background-color: #2c3e50;
+    background-color: #eee;
     color: #333;
   }
 </style>

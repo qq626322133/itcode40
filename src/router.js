@@ -8,7 +8,7 @@ import UseElement from './views/useElement'
 import Login from '@/views/login'
 import Home from '@/views/home'
 // 导入 layout
-// import layout from '@/views/layout'
+import Layout from '@/views/layout'
 
 // 使用路由
 Vue.use(Router)
@@ -27,13 +27,15 @@ export default new Router({
       name: 'login',
       component: Login
     },
-    // {
-    // paht: '/layout',
-    // name: 'layout',
-    // component: Layout
-    // },
+    // 布局路由
     {
-      path: '/Home',
+      path: '/layout',
+      name: 'layout',
+      component: Layout
+    },
+    // 主页路由
+    {
+      path: '/home',
       name: 'home',
       component: Home
     },
