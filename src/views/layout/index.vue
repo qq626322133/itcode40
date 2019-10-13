@@ -8,7 +8,11 @@
          <el-header>
            <layoutheader />
          </el-header>
-        <el-main>Main</el-main>
+        <el-main>
+        <!-- 将来请求 home index publish...路径时，优先加载 layout， -->
+        <!-- 加载完layout 之后再用 home index publish -->
+          <router-view />
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -38,6 +42,7 @@ export default {
     .el-header {
     background-color: #fff;
     color: #333;
+     line-height: 60px;
   }
    .el-aside {
     background-color: #323745;
