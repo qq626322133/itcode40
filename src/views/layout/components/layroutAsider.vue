@@ -9,7 +9,7 @@
     <!--background-color导航栏的背景颜色 text-color:导航中文本的颜色 active-text-color: 导航中被选中文本的颜色-->
     <el-menu :router="true" default-active="2" class="el-menu-vertical-demo" background-color="#353b4e" text-color="#fff" active-text-color="#409eff">
       <!--el-menu-item:直接添加导航（没有二级导航）index:唯一标识  -->
-      <el-menu-item index="1">
+      <el-menu-item index="home">
         <!-- i文字前面的图标 -->
         <span slot="title">首页</span>
       </el-menu-item>
@@ -17,7 +17,7 @@
         <template slot="title">
           <span>内容管理</span>
         </template>
-        <el-menu-item index="2-1">
+        <el-menu-item index="publish">
             <span slot="title">发布文章</span>
        </el-menu-item>
        <el-menu-item index="2-2">
@@ -57,7 +57,12 @@
 <script>
 export default {
   methods: {
-
+    //   handleOpen () {
+    //       console.log('哎呀!我被打开了')
+    //   },
+    //   handleClose () {
+    //       console.log('哎呀!我被关闭了')
+    //   }
   }
 }
 </script>

@@ -109,8 +109,12 @@ export default {
       })
         .then(res => {
           // res 中有一个属性叫做 data在 data 中有两个属性后面我们会用上: token, refresh_token
+          // 得到用户信息
+          let userInfo = res.data.data
+          // 将用户的信息保存到 localstorage 中
+          window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
           // 只要进入到这个方法中说明登录成功
-          this.$router.push('./')
+
           this.$message({
             message: '登录成功',
             type: 'success'
@@ -118,6 +122,7 @@ export default {
           // 将加载状态设置为 false
           this.loginloading = false
           // 跳转到主页
+          this.$router.push('./')
         })
         .catch(err => {
           console.log(err)

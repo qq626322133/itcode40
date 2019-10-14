@@ -9,6 +9,8 @@ import Login from '@/views/login'
 import Home from '@/views/home'
 // 导入 layout
 import Layout from '@/views/layout'
+// 导入 Publish
+import Publish from '@/views/publish'
 
 // 使用路由
 Vue.use(Router)
@@ -34,7 +36,9 @@ export default new Router({
       component: Layout,
       // 添加它的子路由:
       children: [
-        { path: '/home', component: Home }
+        { path: '/home', component: Home },
+        // 添加一个publish 路由
+        { path: '/publish', component: Publish }
       ]
     },
     {
